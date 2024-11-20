@@ -3,6 +3,7 @@ package com.centiglobe.centiglobe_assignment.exception;
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -25,6 +26,19 @@ public class GlobalExceptionHandler {
         HttpStatus httpStatus = HttpStatus.BAD_REQUEST;
         Map<String, Object> body = new HashMap<>();
         body.put("error", errors);
+        return new ResponseEntity<>(body, httpStatus);
+    }
+
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public ResponseEntity<?> handlerException(HttpMessageNotReadableException e) {
+        HttpStatus httpStatus = HttpStatus.BAD_REQUEST;
+        Map<String, Object> body = new HashMap<>();
+        // TODO need to figure out better way to cover most known cases.
+        if(e.getMessage().contains("Invalid UTF-8")) {
+            body.put("error", "Member name does not match required pattern or Connections should be to TYPE integer");
+        } else {
+            body.put("error", e.getMessage());
+        }
         return new ResponseEntity<>(body, httpStatus);
     }
 }
