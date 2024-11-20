@@ -6,9 +6,9 @@ http://localhost:8080/swagger-ui/index.html
 
 curl -i -X GET -H "Content-Type:application/json" http://localhost:8080/api/configs
 
-curl -X 'POST' 'http://localhost:8080/api/configs' -H 'accept:application/hal+json' -H 'Content-Type: application/json' -d '{"memberName": “@rakesh", "maxConnections": 2, "status": "Active"}'
+curl -X 'POST' 'http://localhost:8080/api/configs' -H 'accept:application/hal+json' -H 'Content-Type: application/json' -d '{"memberName": “@rakdr", "maxConnections": 2, "status": "Active"}'
 
-curl -X 'GET' 'http://localhost:8080/api/configs/search/findByMemberName?memberName=%40rakesh' -H 'accept: application/hal+json'
+curl -X 'GET' 'http://localhost:8080/api/configs/search/findByMemberName?memberName=%40rakdr' -H 'accept: application/hal+json'
 
 
 # References
